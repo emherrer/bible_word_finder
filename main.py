@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import requests as rq
 import streamlit as st
 import json
@@ -10,18 +8,23 @@ st.set_page_config(page_title="Home",
                    page_icon="📖",
                    layout="centered")
 
-
-# Add bible versions
+# Load bible versions
 with open("bible_versions.json", "r", encoding="utf-8") as file:
     versions = file.read()
 detail_versions = json.loads(versions)
 
-# Add title
+# Load bible chapters name and numbers
+with open("bible.json", "r", encoding="utf-8") as file:
+    versions = file.read()
+detail_chapters = json.loads(versions)
+
+
+# Add title widget
 st.title("Buscador de palabras".upper())
 
-# Add Box
-option = st.selectbox("Seleccione la versión de la biblia", 
-            ("Reina Valera Revisada 1960", "Reina Valera Actualizada"))
+# Add bible version box
+option = st.selectbox("Seleccione la versión de la biblia",
+                      ("Reina Valera Revisada 1960", "Reina Valera Actualizada"))
 
 if option == "Reina Valera Revisada 1960":
     bible = detail_versions[0].get("bible")
@@ -30,12 +33,14 @@ if option == "Reina Valera Actualizada":
     bible = detail_versions[1].get("bible")
     description = detail_versions[1].get("description")
 
-# Add bible description
+# Add bible version description
 st.write(description)
 
+# Add book Box
+book = st.selectbox("Seleccione el libro",
+                    ([key for key in detail_chapters.keys()]))
 
-api_key = st.secrets["BIBLEPASS"]
-url = f"https://api.biblia.com/v1/bible/content/rva.txt.txt?passage=Genesis1.1&callback=myCallbackFunction&key=9fb4b5e1b6aa039451f4df65bf90f3ba"
-
-
-
+# Add chapter Box
+numbers = detail_chapters.get(book)
+chapter = st.selectbox("Seleccione el capítulo",
+                       ([number for number in range(1, numbers + 1)]))
