@@ -1,0 +1,14 @@
+[
+    {
+        "bible": "rvr60",
+        "title": "Reina Valera Revisada (1960)",
+        "publishers": "Sociedades Bíblicas Unidas",
+        "description": "Esta edición de la Reina Valera (RVR60) es una revisión y actualización de la Reina-Valera 1909. Reúne las características de la versión de 1909, pero en un lenguaje más actual, de acuerdo al uso del castellano literario de la década de los 50. Fue revisada por un excelente equipo de gente conocedora de la exégesis bíblica y el castellano. Es, hoy por hoy, la versión más leída y estudiada en los círculos evangélicos de habla hispana. Vale la pena recordar al usuario que esta versión, como las otras revisiones de la Reina-Valera hechas por las sociedades bíblicas unidas (SBU), mantiene tanto la base textual de la primera Reina-Valera, así como su base exegética y nivel y calidad literaria. Ha mantenido como sus predecesoras la división por versículos para hacer más fácil la lectura en público de la Biblia."
+    },
+    {
+        "bible": "rva",
+        "title": "Reina Valera Actualizada",
+        "publishers": "Editorial Bautista Española y Mundo Hispano",
+        "description": "Esta edición de la Reina Valera (RVA) es la última de una larga línea de revisiones de la Biblia clásica Casiodoro de Reina de 1569. Esta edición se basa en las revisiones de 1909 y 1960 y utiliza los mejores textos hebreos y griegos disponibles en la actualidad. La RVA utiliza un lenguaje contemporáneo que la gente puede entender en todo el mundo de habla hispana."
+    }
+]
