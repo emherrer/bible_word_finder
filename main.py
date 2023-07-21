@@ -1,12 +1,13 @@
 import requests as rq
 import streamlit as st
 import json
+from backend import get_bible_text
 
 
 # Add page config and titles
 st.set_page_config(page_title="Home",
                    page_icon="📖",
-                   layout="centered")
+                   layout="wide")
 
 # Load bible versions
 with open("bible_versions.json", "r", encoding="utf-8") as file:
@@ -37,10 +38,15 @@ if option == "Reina Valera Actualizada":
 st.write(description)
 
 # Add book Box
-book = st.selectbox("Seleccione el libro",
+book_es = st.selectbox("Seleccione el libro",
                     ([key for key in detail_chapters.keys()]))
+book_en = detail_chapters.get(book_es).get("Inglés")
 
 # Add chapter Box
-numbers = detail_chapters.get(book)
+numbers = detail_chapters.get(book_es).get("Capítulos")
 chapter = st.selectbox("Seleccione el capítulo",
                        ([number for number in range(1, numbers + 1)]))
+
+# Call bible chapter text
+text = get_bible_text(version=bible, book=book_en, chapter=chapter)
+st.write(text)
