@@ -15,4 +15,4 @@ def get_bible_text(version, book, chapter):
 
 
 if __name__ == "__main__":
-    print(get_bible_text(version="rvr60", book="Acts", chapter="3"))
+    print(get_bible_text(version="rvr60", book="Obadiah", chapter="1"))

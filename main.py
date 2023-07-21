@@ -38,13 +38,21 @@ if option == "Reina Valera Actualizada":
 st.write(description)
 
 # Add book Box
+help = """
+Los libros: Abdías, Filemón, 2 Juan, 3 Juan y Judas, solo tienen 1 capítulo. 
+"""
 book_es = st.selectbox("Seleccione el libro",
-                    ([key for key in detail_chapters.keys()]))
+                    ([key for key in detail_chapters.keys()]), 
+                    help=help)
 book_en = detail_chapters.get(book_es).get("Inglés")
 
 # Add chapter Box
 numbers = detail_chapters.get(book_es).get("Capítulos")
-chapter = st.selectbox("Seleccione el capítulo",
+
+if numbers == 1:
+    chapter = ""
+else:
+    chapter = st.selectbox("Seleccione el capítulo",
                        ([number for number in range(1, numbers + 1)]))
 
 # Call bible chapter text
