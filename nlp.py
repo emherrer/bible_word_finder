@@ -3,7 +3,6 @@ import re
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-from backend import get_bible_text
 
 
 def get_wordcloud_data_and_plot(version, book, chapter):
@@ -17,9 +16,9 @@ def get_wordcloud_data_and_plot(version, book, chapter):
 
     # Capitalize "God" names
     words = []
-    god_names = ["dios", "jehovah", "jesus"]
+    holy_words = ["dios", "jehovah", "jesus", "jehová", "altísimo"]
     for word in findings:
-        if word in god_names:
+        if word in holy_words:
             cap_word = word.capitalize()
             words.append(cap_word)
         else:
@@ -43,7 +42,7 @@ def get_wordcloud_data_and_plot(version, book, chapter):
         d.items(), reverse=True, key=lambda x: x[1])}
 
     # Get WordCloud Plot
-    wc = WordCloud(width=800, height=400, max_words=200,
+    wc = WordCloud(width=1000, height=800, max_words=200,
                    include_numbers=True).generate_from_frequencies(sorted_d)
     plt.figure(figsize=(10, 10))
     plt.imshow(wc, interpolation='bilinear')

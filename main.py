@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 from backend import get_bible_text
+from nlp import get_wordcloud_data_and_plot
 
 
 # Add page config and titles
@@ -56,3 +57,7 @@ else:
 # Call bible chapter text
 text = get_bible_text(version=bible, book=book_en, chapter=chapter)
 st.write(text)
+
+# Add wordcloud data and graph
+data, graph = get_wordcloud_data_and_plot(version=bible, book=book_en, chapter=chapter)
+st.image("wordcloud_fig.png")
