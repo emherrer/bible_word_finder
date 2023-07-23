@@ -16,7 +16,7 @@ def get_wordcloud_data_and_plot(version, book, chapter):
 
     # Capitalize "God" names
     words = []
-    holy_words = ["dios", "jehovah", "jesus", "jehová", "altísimo"]
+    holy_words = ["dios", "jehovah", "jesús", "jehová", "altísimo"]
     for word in findings:
         if word in holy_words:
             cap_word = word.capitalize()

@@ -20,11 +20,12 @@ with open("bible.json", "r", encoding="utf-8") as file:
 detail_chapters = json.loads(versions)
 
 # Add title widget
-st.title("Buscador de palabras".upper())
+st.title("Nube de palabras Biblicas".upper())
+st.subheader("Visualiza la Palabra de Dios por Libro y Capítulo")
 
 # Add bible version box
 version = st.selectbox("Seleccione la versión de la biblia",
-                      ("Reina Valera Revisada 1960", "Reina Valera Actualizada"))
+                       ("Reina Valera Revisada 1960", "Reina Valera Actualizada"))
 
 if version == "Reina Valera Revisada 1960":
     bible = detail_versions[0].get("bible")
@@ -59,5 +60,7 @@ text = get_bible_text(version=bible, book=book_en, chapter=chapter)
 st.write(text)
 
 # Add wordcloud data and graph
-data, graph = get_wordcloud_data_and_plot(version=bible, book=book_en, chapter=chapter)
-st.image("wordcloud_fig.png")
+data, graph = get_wordcloud_data_and_plot(
+    version=bible, book=book_en, chapter=chapter)
+st.image("wordcloud_fig.png",
+         caption=f"Nube de palabras de {book_es} capítulo {chapter}")
