@@ -2,6 +2,7 @@ import streamlit as st
 import json
 from backend import get_bible_text
 from nlp import get_wordcloud_data_and_plot
+import plotly.express as px
 
 
 # Add page config and titles
@@ -65,3 +66,12 @@ st.image("wordcloud_fig.png",
 st.subheader(f"{book_es} capítulo {chapter}:")
 text = get_bible_text(version=bible, book=book_en, chapter=chapter)
 st.write(text)
+
+# Add Top 20 words
+top = 20
+keys = list(data.keys())[:top][::-1]
+values = list(data.values())[:top][::-1]
+fig = px.bar(x=values, y=keys, text=values, orientation="h", color_discrete_sequence=["#00172B"],
+             labels={'x': 'Palabra', 'y': 'Frecuencia'}, title='Top 20 palabras')
+fig.update_traces(textposition='outside')
+st.plotly_chart(fig)
