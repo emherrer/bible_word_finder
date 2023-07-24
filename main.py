@@ -55,12 +55,13 @@ else:
     chapter = st.selectbox("Seleccione el capítulo",
                            ([number for number in range(1, numbers + 1)]))
 
-# Call bible chapter text
-text = get_bible_text(version=bible, book=book_en, chapter=chapter)
-st.write(text)
-
 # Add wordcloud data and graph
 data, graph = get_wordcloud_data_and_plot(
     version=bible, book=book_en, chapter=chapter)
 st.image("wordcloud_fig.png",
          caption=f"Nube de palabras de {book_es} capítulo {chapter}")
+
+# Call bible chapter text
+st.subheader(f"{book_es} capítulo {chapter}:")
+text = get_bible_text(version=bible, book=book_en, chapter=chapter)
+st.write(text)

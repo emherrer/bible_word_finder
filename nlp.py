@@ -1,4 +1,6 @@
 from backend import get_bible_text
+from PIL import Image
+import numpy as np
 import re
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
@@ -42,13 +44,16 @@ def get_wordcloud_data_and_plot(version, book, chapter):
         d.items(), reverse=True, key=lambda x: x[1])}
 
     # Get WordCloud Plot
-    wc = WordCloud(width=1000, height=800, max_words=200,
+    mask = np.array(Image.open("biblia.png"))
+    wc = WordCloud(width=1000, height=800, max_words=200, background_color="#00172B",
+                   contour_color="black", contour_width=1,
                    include_numbers=True).generate_from_frequencies(sorted_d)
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(8, 8))
     plt.imshow(wc, interpolation='bilinear')
     plt.axis('off')
+    plt.tight_layout(pad=2)
     graph = "wordcloud_fig.png"
-    plt.savefig(graph)
+    plt.savefig(graph, bbox_inches="tight")
 
     return sorted_d, graph
 
