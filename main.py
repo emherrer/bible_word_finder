@@ -56,22 +56,30 @@ else:
     chapter = st.selectbox("Seleccione el capítulo",
                            ([number for number in range(1, numbers + 1)]))
 
-# Add wordcloud data and graph
-data, graph = get_wordcloud_data_and_plot(
-    version=bible, book=book_en, chapter=chapter)
-st.image("wordcloud_fig.png",
-         caption=f"Nube de palabras de {book_es} capítulo {chapter}")
+# Add columns for graphs
+col1, col2 = st.columns([1.5, 1.5])
+
+with col1:
+    # Add wordcloud data and graph
+    data, graph = get_wordcloud_data_and_plot(
+        version=bible, book=book_en, chapter=chapter)
+    st.image("wordcloud_fig.png",
+             caption=f"Nube de palabras de {book_es} capítulo {chapter}")
+
+with col2:
+    # Add Plotly Top 20 words (color_discrete_sequence=["#00172B"])
+    top = 20
+    keys = list(data.keys())[:top][::-1]
+    values = list(data.values())[:top][::-1]
+    fig = px.bar(x=values, y=keys, text=values, orientation="h")
+    fig.update_traces(textposition='outside')
+    fig.update_layout(title='Top 20 palabras', xaxis_title='Palabra',
+                      yaxis_title='Frecuencia',
+                      width=800,
+                      height=680)
+    st.plotly_chart(fig)
 
 # Call bible chapter text
 st.subheader(f"{book_es} capítulo {chapter}:")
 text = get_bible_text(version=bible, book=book_en, chapter=chapter)
 st.write(text)
-
-# Add Top 20 words
-top = 20
-keys = list(data.keys())[:top][::-1]
-values = list(data.values())[:top][::-1]
-fig = px.bar(x=values, y=keys, text=values, orientation="h", color_discrete_sequence=["#00172B"],
-             labels={'x': 'Palabra', 'y': 'Frecuencia'}, title='Top 20 palabras')
-fig.update_traces(textposition='outside')
-st.plotly_chart(fig)
