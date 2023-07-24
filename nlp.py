@@ -1,10 +1,11 @@
 from backend import get_bible_text
 import re
+import nltk
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-
+nltk.download("stopwords")
 def get_wordcloud_data_and_plot(version, book, chapter):
 
     # Call get_bible_text function
