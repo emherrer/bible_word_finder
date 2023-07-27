@@ -57,7 +57,7 @@ else:
                            ([number for number in range(1, numbers + 1)]))
 
 # Add columns for graphs
-col1, col2 = st.columns([1.5, 1.5])
+col1, col2 = st.columns([2, 1])
 
 with col1:
     # Add wordcloud data and graph
@@ -68,16 +68,15 @@ with col1:
 
 with col2:
     # Add Plotly Top 20 words (color_discrete_sequence=["#00172B"])
-    top = 20
+    top = 5
+    st.subheader(f"Primeras {top} palabras mas repetidas")
     keys = list(data.keys())[:top][::-1]
     values = list(data.values())[:top][::-1]
     fig = px.bar(x=values, y=keys, text=values, orientation="h")
     fig.update_traces(textposition='outside')
-    fig.update_layout(title='Top 20 palabras', xaxis_title='Palabra',
-                      yaxis_title='Frecuencia',
-                      width=800,
-                      height=680)
-    st.plotly_chart(fig)
+    fig.update_layout(title='', xaxis_title='Frecuencia',
+                      yaxis_title='Palabra')
+    st.plotly_chart(fig, use_container_width=True)
 
 # Call bible chapter text
 st.subheader(f"{book_es} capítulo {chapter}:")
